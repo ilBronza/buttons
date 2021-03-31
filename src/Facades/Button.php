@@ -1,10 +1,10 @@
 <?php
 
-namespace IlBronza\Buttons\Facades;
+namespace IlBronza\Button\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Buttons extends Facade
+class Button extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class Buttons extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'buttons';
+        return 'button';
     }
 }

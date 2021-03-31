@@ -1,10 +1,10 @@
 <?php
 
-namespace IlBronza\Buttons;
+namespace IlBronza\Button;
 
 use Illuminate\Support\ServiceProvider;
 
-class ButtonsServiceProvider extends ServiceProvider
+class ButtonServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
@@ -31,11 +31,11 @@ class ButtonsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/buttons.php', 'buttons');
+        $this->mergeConfigFrom(__DIR__.'/../config/button.php', 'button');
 
         // Register the service the package provides.
-        $this->app->singleton('buttons', function ($app) {
-            return new Buttons;
+        $this->app->singleton('button', function ($app) {
+            return new Button;
         });
     }
 
@@ -46,7 +46,7 @@ class ButtonsServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['buttons'];
+        return ['button'];
     }
 
     /**
@@ -58,23 +58,23 @@ class ButtonsServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/../config/buttons.php' => config_path('buttons.php'),
-        ], 'buttons.config');
+            __DIR__.'/../config/button.php' => config_path('button.php'),
+        ], 'button.config');
 
         // Publishing the views.
         /*$this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/ilbronza'),
-        ], 'buttons.views');*/
+        ], 'button.views');*/
 
         // Publishing assets.
         /*$this->publishes([
             __DIR__.'/../resources/assets' => public_path('vendor/ilbronza'),
-        ], 'buttons.views');*/
+        ], 'button.views');*/
 
         // Publishing the translation files.
         /*$this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/ilbronza'),
-        ], 'buttons.views');*/
+        ], 'button.views');*/
 
         // Registering package commands.
         // $this->commands([]);

@@ -1,6 +1,6 @@
 {
-    "name": "ilbronza/buttons",
-    "description": "buttons",
+    "name": "ilbronza/button",
+    "description": "button",
     "license": "MIT",
     "authors": [
         {
@@ -9,8 +9,8 @@
             "homepage": "https://www.sistema.srl"
         }
     ],
-    "homepage": "https://github.com/ilbronza/buttons",
-    "keywords": ["Laravel", "Buttons"],
+    "homepage": "https://github.com/ilbronza/button",
+    "keywords": ["Laravel", "Button"],
     "require": {
         "illuminate/support": "~7|~8"
     },
@@ -20,21 +20,21 @@
     },
     "autoload": {
         "psr-4": {
-            "IlBronza\\Buttons\\": "src/"
+            "IlBronza\\Button\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "IlBronza\\Buttons\\Tests\\": "tests"
+            "IlBronza\\Button\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "IlBronza\\Buttons\\ButtonsServiceProvider"
+                "IlBronza\\Button\\ButtonServiceProvider"
             ],
             "aliases": {
-                "Buttons": "IlBronza\\Buttons\\Facades\\Buttons"
+                "Button": "IlBronza\\Button\\Facades\\Button"
             }
         }
     }

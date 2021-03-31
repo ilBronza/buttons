@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `Buttons` will be documented in this file.
+All notable changes to `Button` will be documented in this file.
 
 ## Version 1.0
 
