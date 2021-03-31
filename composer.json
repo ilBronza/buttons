@@ -1,0 +1,41 @@
+{
+    "name": "ilbronza/buttons",
+    "description": "buttons",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Davide Bronzini",
+            "email": "davide@sistema.srl",
+            "homepage": "www.sistema.srl"
+        }
+    ],
+    "homepage": "https://github.com/ilbronza/buttons",
+    "keywords": ["Laravel", "Buttons"],
+    "require": {
+        "illuminate/support": "~7|~8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~5|~6"
+    },
+    "autoload": {
+        "psr-4": {
+            "IlBronza\\Buttons\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IlBronza\\Buttons\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IlBronza\\Buttons\\ButtonsServiceProvider"
+            ],
+            "aliases": {
+                "Buttons": "IlBronza\\Buttons\\Facades\\Buttons"
+            }
+        }
+    }
+}
