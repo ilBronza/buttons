@@ -1,4 +1,4 @@
-<li class="{{ $button->getClasses() }} {{ ($button->isChild())? 'uk-nav-divider' : '' }}">
+<li class="{{ $button->getHtmlClassesString() }} {{ ($button->isChild())? 'uk-nav-divider' : '' }}">
 
     <a href="{{ $button->href ?? 'javascript:void(0)' }}"
 

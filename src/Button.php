@@ -7,13 +7,15 @@ use Illuminate\Support\Str;
 class Button
 {
     public $href;
+    public $submit;
     public $iframe = false;
     public $ajax;
     public $ajaxTableSelector;
     public $ukIcon;
     public $dgIcon;
     public $text;
-    public $classes;
+    public $value;
+    public $classes = ['uk-button'];
     public $flatWindow;
     public $type;
     public $tooltip;
@@ -24,12 +26,14 @@ class Button
     public $returnConfirm = false;
     private $hash;
 
-    public function __construct(string $href = null, string $text = null, string $ukIcon = null, array $classes = [], array $parameters = [])
+    public function __construct(string $href = null, string $text = null, string $ukIcon = null, array $classes = null, array $parameters = [])
     {
         $this->href = $href;
         $this->text = $text;
         $this->ukIcon = $ukIcon;
-        $this->classes = $classes;
+
+        if($classes)
+            $this->classes = $classes;
 
         $this->hash = Str::uuid();
 
@@ -71,6 +75,16 @@ class Button
         $this->data['tableid'] = $tableId;        
     }
 
+    public function hasHref()
+    {
+        return !! $this->href;
+    }
+
+    public function setHref(string $href)
+    {
+        $this->href = $href;
+    }
+
     public function getNoHrefValue()
     {
         return "javascript:void(0)";
@@ -95,6 +109,16 @@ class Button
         $this->attributes[$attribute] = $value;
     }
 
+    public function haasValue()
+    {
+        return ! is_null($this->value);
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
     public function set(string $parameter, $value)
     {
         if(isset($this->$parameter))
@@ -111,12 +135,27 @@ class Button
         $this->count = $count;
     }
 
-    public function getClasses()
+    public function setPrimary()
+    {
+        $this->classes[] = 'uk-button-primary';
+    }
+
+    public function setSmall()
+    {
+        $this->classes[] = 'uk-button-small';
+    }
+
+    public function getHtmlClassesString()
+    {
+        return implode(" ", $this->getHtmlClasses());        
+    }
+
+    public function getHtmlClasses()
     {
         if($this->flatWindow)
             array_push($this->classes, 'flatwindow');
 
-        return implode(" ", $this->classes);
+        return $this->classes;
     }
 
     public function isChild()
@@ -148,6 +187,11 @@ class Button
     public function isAjaxButton()
     {
         return $this->ajax;
+    }
+
+    public function render()
+    {
+        return view('buttons::__button', ['button' => $this])->render();
     }
 
     public function renderLink()
@@ -195,6 +239,16 @@ class Button
         return Str::slug($this->text, '_');        
     }
 
+    public function getText()
+    {
+        return trans($this->text);
+    }
+
+    public function setText(string $text)
+    {
+        $this->text = $text;
+    }
+
     /**
      * return javascript methods for datatables buttons
      *
@@ -213,6 +267,14 @@ class Button
         return $this->ajax ?? false;
     }
 
+    public function getTag()
+    {
+        if($this->hasHref())
+            return 'a';
+
+        return 'button';
+    }
+
     /**
      * render javascript redirect for datatables buttons
      *
@@ -223,4 +285,13 @@ class Button
         return "window.location.href='{$this->getHref()}'";
     }
 
+    public function setSubmit()
+    {
+        $this->submit = true;
+    }
+
+    public function isSubmit()
+    {
+        return !! $this->submit;
+    }
 }

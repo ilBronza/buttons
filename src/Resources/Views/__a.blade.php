@@ -31,7 +31,7 @@
         uk-tooltip="title: {{ $button->tooltip }}"
         @endif
 
-        @if($classes = $button->getClasses())
+        @if($classes = $button->getHtmlClassesString())
         class="{{ $classes }}"
         @endif
 
