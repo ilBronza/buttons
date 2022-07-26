@@ -140,6 +140,16 @@ class Button
         $this->classes[] = 'uk-button-primary';
     }
 
+    public function setDanger()
+    {
+        $this->setHtmlClass('uk-button-danger');
+    }
+
+    public function setHtmlClass(string $class)
+    {
+        $this->classes[] = $class;
+    }
+
     public function setSmall()
     {
         $this->classes[] = 'uk-button-small';
@@ -187,6 +197,40 @@ class Button
     public function isAjaxButton()
     {
         return $this->ajax;
+    }
+
+    public function getIcon()
+    {
+        return $this->ukIcon;
+    }
+
+    public function getFaIcon()
+    {
+        return null;
+    }
+
+    public function setIcon(string $icon)
+    {
+        $this->ukIcon = $icon;
+    }
+
+    public function setIconOrDefault(string $icon = null)
+    {
+        if($icon)
+            return $this->setIcon($icon);
+
+        if($this->getIcon())
+            return ;
+
+        $this->setIcon('link');
+    }
+
+    public function renderIcon(string $icon = null)
+    {
+        $this->setText();
+        $this->setIconOrDefault($icon);
+
+        return view('buttons::__a', ['button' => $this])->render();        
     }
 
     public function render()
@@ -244,7 +288,7 @@ class Button
         return trans($this->text);
     }
 
-    public function setText(string $text)
+    public function setText(string $text = null)
     {
         $this->text = $text;
     }
@@ -288,6 +332,9 @@ class Button
     public function setSubmit()
     {
         $this->submit = true;
+
+        if(! $this->value)
+            $this->value = 1;
     }
 
     public function isSubmit()

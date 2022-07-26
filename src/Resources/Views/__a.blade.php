@@ -46,6 +46,10 @@
         @endif
 
         >
+        @if($icon = $button->getFaIcon())
+        {!! $icon !!}
+        @endif
+
         {{ $button->text }}
     </a>
 
@@ -72,6 +76,10 @@
         @endisset
 
         >
+        @if($icon = $button->getFaIcon())
+        {!! $icon !!}
+        @endif
+
         {{ $button->text }}
 
     </button>
