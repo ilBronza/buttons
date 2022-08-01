@@ -1,6 +1,6 @@
 <?php
 
-namespace IlBronza\Button;
+namespace IlBronza\Buttons;
 
 use Illuminate\Support\Str;
 

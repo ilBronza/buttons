@@ -9,8 +9,8 @@
             "homepage": "https://www.sistema.srl"
         }
     ],
-    "homepage": "https://github.com/ilbronza/button",
-    "keywords": ["Laravel", "Button"],
+    "homepage": "https://github.com/ilbronza/buttons",
+    "keywords": ["Laravel", "Buttons"],
     "require": {
     },
     "require-dev": {
@@ -19,21 +19,21 @@
     },
     "autoload": {
         "psr-4": {
-            "IlBronza\\Button\\": "src/"
+            "IlBronza\\Buttons\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "IlBronza\\Button\\Tests\\": "tests"
+            "IlBronza\\Buttons\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "IlBronza\\Button\\ButtonServiceProvider"
+                "IlBronza\\Buttons\\ButtonServiceProvider"
             ],
             "aliases": {
-                "Button": "IlBronza\\Button\\Facades\\Button"
+                "Button": "IlBronza\\Buttons\\Facades\\Button"
             }
         }
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace IlBronza\Button\Facades;
+namespace IlBronza\Buttons\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
