@@ -2,18 +2,45 @@
 
 namespace IlBronza\Buttons;
 
+use IlBronza\Buttons\Icons\Traits\UseIconTrait;
+use IlBronza\Buttons\Traits\ButtonChildrenTrait;
+use IlBronza\Buttons\Traits\ButtonGettersTrait;
+use IlBronza\Buttons\Traits\ButtonRenderTrait;
+use IlBronza\Buttons\Traits\ButtonPermissionsTrait;
+use IlBronza\Buttons\Traits\ButtonSettersTrait;
+use IlBronza\Buttons\Traits\ButtonTextTrait;
+use IlBronza\Buttons\Traits\ButtonToggleTrait;
+use IlBronza\Buttons\Traits\NewButtonMethodsTraitToRenameAfterHaveMovedEverything;
+use IlBronza\Menu\Traits\InteractsWithNavbarTrait;
+use IlBronza\UikitTemplate\Traits\UseTemplateTrait;
 use Illuminate\Support\Str;
 
 class Button
 {
+    use UseTemplateTrait;
+    use UseIconTrait;
+
+    use ButtonTextTrait;
+    use ButtonChildrenTrait;
+
+    use ButtonPermissionsTrait;
+    use ButtonGettersTrait;
+    use ButtonSettersTrait;
+    use ButtonToggleTrait;
+
+    use ButtonRenderTrait;
+
+    use InteractsWithNavbarTrait;
+
+    use NewButtonMethodsTraitToRenameAfterHaveMovedEverything;
+
     public $href;
     public $submit;
     public $iframe = false;
     public $ajax;
     public $ajaxTableSelector;
-    public $ukIcon;
-    public $dgIcon;
-    public $text;
+    // public $ukIcon;
+    // public $dgIcon;
     public $value;
     public $classes = ['uk-button'];
     public $flatWindow;
@@ -21,33 +48,38 @@ class Button
     public $tooltip;
     public $attributes = [];
     public $data = [];
-    public $children = [];
-    public $count = false;
+    public $children;
     public $returnConfirm = false;
     private $hash;
 
-    public function __construct(string $href = null, string $text = null, string $ukIcon = null, array $classes = null, array $parameters = [])
+
+    //DEPRECATO
+    public $ukIcon;
+
+    public function getViewComponentName() : ? string
     {
-        $this->href = $href;
-        $this->text = $text;
-        $this->ukIcon = $ukIcon;
-
-        if($classes)
-            $this->classes = $classes;
-
-        $this->hash = Str::uuid();
-
-        $this->icon = $ukIcon;
+        return 'buttons';
     }
 
-    public function setId(string $buttonId)
+    public function __construct(array $parameters)
     {
-        $this->id = $buttonId;
+        foreach($parameters as $key => $value)
+            $this->$key = $value;
+
+        $this->setNameByParameters($parameters);
+        $this->setIconByParameters($parameters);
+
+        $this->children = collect();
+        $this->setChildrenByParameters($parameters);
+
+        // $this->hash = Str::uuid();
     }
 
-    public function getId()
+    static function create(array $parameters) : static
     {
-        return $this->id ?? null;
+        return new static(
+            $parameters
+        );
     }
 
     public function getAttributes()
@@ -130,10 +162,11 @@ class Button
         $this->returnConfirm = $confirmationMessage;
     }
 
-    public function addCount(int $count)
-    {
-        $this->count = $count;
-    }
+    //DEPRECATED TO SET COUNT
+    // public function addCount(int $count)
+    // {
+    //     $this->count = $count;
+    // }
 
     public function setPrimary()
     {
@@ -168,11 +201,6 @@ class Button
         return $this->classes;
     }
 
-    public function isChild()
-    {
-        return true;
-    }
-
     public function addClass(string $class)
     {
         $this->classes[] = $class;
@@ -199,39 +227,45 @@ class Button
         return $this->ajax;
     }
 
-    public function getIcon()
-    {
-        return $this->ukIcon;
-    }
+    // public function setIcon(string $icon)
+    // {
+    //     $this->ukIcon = $icon;
+    // }
 
-    public function getFaIcon()
+    //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
+    public function setUkIcon(string $icon)
     {
-        return null;
-    }
-
-    public function setIcon(string $icon)
-    {
+        //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
+        //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
+        //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
+        //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
         $this->ukIcon = $icon;
+        //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
+        //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
+        //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
+        //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
     }
+    //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
 
-    public function setIconOrDefault(string $icon = null)
-    {
-        if($icon)
-            return $this->setIcon($icon);
+    //DEPRECATED
+    // public function setIconOrDefault(string $icon = null)
+    // {
+    //     if($icon)
+    //         return $this->setUkIcon($icon);
 
-        if($this->getIcon())
-            return ;
+    //     if($this->getIcon())
+    //         return ;
 
-        $this->setIcon('link');
-    }
+    //     $this->setUkIcon('link');
+    // }
 
-    public function renderIcon(string $icon = null)
-    {
-        $this->setText();
-        $this->setIconOrDefault($icon);
+    // public function renderIcon(string $icon = null)
+    // {
+    //     $this->setText();
+    //     $this->setIconOrDefault($icon);
 
-        return view('buttons::__a', ['button' => $this])->render();        
-    }
+    //     return view('buttons::__a', ['button' => $this])->render();
+    // }
 
     public function render()
     {
@@ -265,12 +299,19 @@ class Button
         $this->name = $name;
     }
 
-    public function tooltip(string $text = null)
-    {
-        if(! $text)
-            return $this->tooltip;
+    // public function tooltip(string $tooltip = null)
+    // {
+    //     if(! $tooltip)
+    //         return $this->tooltip;
 
-        $this->tooltip = $text;
+    //     $this->tooltip = $tooltip;
+
+    //     return $this;
+    // }
+
+    public function tooltip(string $tooltip = null)
+    {
+        $this->tooltip = $tooltip;
 
         return $this;
     }
@@ -281,16 +322,6 @@ class Button
             return $this->name;
 
         return Str::slug($this->text, '_');        
-    }
-
-    public function getText()
-    {
-        return trans($this->text);
-    }
-
-    public function setText(string $text = null)
-    {
-        $this->text = $text;
     }
 
     /**
@@ -341,4 +372,5 @@ class Button
     {
         return !! $this->submit;
     }
+
 }

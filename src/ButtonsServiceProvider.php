@@ -4,7 +4,7 @@ namespace IlBronza\Buttons;
 
 use Illuminate\Support\ServiceProvider;
 
-class ButtonServiceProvider extends ServiceProvider
+class ButtonsServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
@@ -31,7 +31,7 @@ class ButtonServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/button.php', 'button');
+        $this->mergeConfigFrom(__DIR__.'/../config/buttons.php', 'buttons');
 
         // Register the service the package provides.
         $this->app->singleton('button', function ($app) {

@@ -1,0 +1,1 @@
+uk-toggle="target: {{ $button->getToggle() }}"
