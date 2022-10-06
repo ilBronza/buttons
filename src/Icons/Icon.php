@@ -13,7 +13,7 @@ abstract class Icon
 		return $this->code;
 	}
 
-	static function create(array $parameters) : static
+	static function create(array $parameters) : self
 	{
 		$icon = new static;
 

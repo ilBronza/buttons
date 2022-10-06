@@ -75,7 +75,7 @@ class Button
         // $this->hash = Str::uuid();
     }
 
-    static function create(array $parameters) : static
+    static function create(array $parameters) : self
     {
         return new static(
             $parameters
@@ -285,7 +285,14 @@ class Button
 
     public function renderAsIframe()
     {
-        $this->iframe = true;        
+        return $this->setAsIframe();
+    }
+
+    public function setAsIframe()
+    {
+        $this->iframe = true;
+
+        return $this;
     }
 
     public function renderIFrame()

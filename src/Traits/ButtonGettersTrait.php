@@ -20,4 +20,15 @@ trait ButtonGettersTrait
 
         return $this->id;
     }
+
+    public function getDropdownWidth() : ? string
+    {
+        if($this->dropdownWidth)
+            return $this->dropdownWidth;
+
+        if(! $this->isChild())
+            return null;
+
+        return 200 * $this->getChildrenColumnNumber() . 'px;';
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace IlBronza\Buttons\Traits;
 
+use Illuminate\Support\Str;
+
 trait NewButtonMethodsTraitToRenameAfterHaveMovedEverything
 {
 	public $id;
@@ -11,6 +13,7 @@ trait NewButtonMethodsTraitToRenameAfterHaveMovedEverything
 
     public $icon;
 
+    public $dropdownWidth;
     public $dropdownColumns = 1;
 
     public $toggle;
@@ -40,6 +43,9 @@ trait NewButtonMethodsTraitToRenameAfterHaveMovedEverything
         foreach(['label', 'text', 'translatedText'] as $parameterName)
             if($parameters[$parameterName] ?? false)
                 return $this->name = $parameters[$parameterName];
+
+        if($parameters['href'] ?? false)
+            return $this->name = Str::slug($parameters['href']);
 
         throw new \Exception('Missing name parameter required for this button: ' . json_encode($parameters));
     }

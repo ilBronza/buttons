@@ -6,6 +6,16 @@ use IlBronza\Buttons\Button;
 
 trait ButtonSettersTrait
 {
+	public function setTarget(string $target)
+	{
+		$this->target = $target;
+	}
+
+	public function setBlank()
+	{
+		return $this->setTarget('_blank');
+	}
+
 	public function setCount(float $count)
 	{
 		return $this->count = $count;
