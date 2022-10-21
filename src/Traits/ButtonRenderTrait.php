@@ -6,6 +6,11 @@ use Illuminate\Support\Str;
 
 trait ButtonRenderTrait
 {
+    public function render()
+    {
+        return $this->renderType('button');
+    }
+
     public function navbarRender(string $type = 'horizontal')
     {
         return $this->renderType('navbar.' . $type);

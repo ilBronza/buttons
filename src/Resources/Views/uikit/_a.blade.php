@@ -1,6 +1,8 @@
 <a
 	href="{{ $button->getHref() }}"
 
+	class="{{ $button->getHtmlClassesString() }}"
+
 	id="{{ $button->getContextId() }}"
 	{!! $button->renderToggle() !!}
 

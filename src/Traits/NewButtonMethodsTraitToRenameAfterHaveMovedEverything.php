@@ -13,6 +13,7 @@ trait NewButtonMethodsTraitToRenameAfterHaveMovedEverything
 
     public $icon;
 
+    public $navbar;
     public $dropdownWidth;
     public $dropdownColumns = 1;
 
