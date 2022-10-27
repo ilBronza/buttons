@@ -26,9 +26,9 @@ trait ButtonChildrenTrait
 
 	public function addChild(self $button)
 	{
-		$this->children->push($button);
-
 		$button->parent = $this;
+
+		$this->children->push($button);
 
 		$button->removeFromNavbar();
 	}
@@ -40,9 +40,14 @@ trait ButtonChildrenTrait
 
 	public function addChildFromArray($parameters)
 	{
+		$button = static::create($parameters);
+
 		$this->addChild(
-			static::create($parameters)
+			$button
 		);
+
+		// if($button->isNavbarButton())
+		// 	$button->removeButtonHtmlClass('uk-button');
 	}
 
 	public function addChildrenFromArray(array $children)

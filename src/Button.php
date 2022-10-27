@@ -5,9 +5,10 @@ namespace IlBronza\Buttons;
 use IlBronza\Buttons\Icons\Traits\UseIconTrait;
 use IlBronza\Buttons\Traits\ButtonChildrenTrait;
 use IlBronza\Buttons\Traits\ButtonGettersTrait;
-use IlBronza\Buttons\Traits\ButtonRenderTrait;
 use IlBronza\Buttons\Traits\ButtonPermissionsTrait;
+use IlBronza\Buttons\Traits\ButtonRenderTrait;
 use IlBronza\Buttons\Traits\ButtonSettersTrait;
+use IlBronza\Buttons\Traits\ButtonStyleTrait;
 use IlBronza\Buttons\Traits\ButtonTextTrait;
 use IlBronza\Buttons\Traits\ButtonToggleTrait;
 use IlBronza\Buttons\Traits\NewButtonMethodsTraitToRenameAfterHaveMovedEverything;
@@ -27,6 +28,7 @@ class Button
     use ButtonGettersTrait;
     use ButtonSettersTrait;
     use ButtonToggleTrait;
+    use ButtonStyleTrait;
 
     use ButtonRenderTrait;
 
@@ -188,11 +190,6 @@ class Button
         $this->classes[] = 'uk-button-small';
     }
 
-    public function getHtmlClassesString()
-    {
-        return implode(" ", $this->getHtmlClasses());        
-    }
-
     public function getHtmlClasses()
     {
         if($this->flatWindow)
@@ -266,11 +263,6 @@ class Button
 
     //     return view('buttons::__a', ['button' => $this])->render();
     // }
-
-    public function render()
-    {
-        return view('buttons::__button', ['button' => $this])->render();
-    }
 
     public function renderLink()
     {
