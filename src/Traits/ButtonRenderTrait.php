@@ -11,6 +11,13 @@ trait ButtonRenderTrait
         return $this->renderType('button');
     }
 
+    public function renderA()
+    {
+        $this->removeButtonHtmlClass('uk-button');
+
+        return $this->renderType('button');
+    }
+
     public function navbarRender(string $type = 'horizontal')
     {
         return $this->renderType('navbar.' . $type);
