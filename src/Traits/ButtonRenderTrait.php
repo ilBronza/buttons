@@ -11,6 +11,11 @@ trait ButtonRenderTrait
         return $this->renderType('button');
     }
 
+    public function renderLink()
+    {
+        return $this->renderA();
+    }
+
     public function renderA()
     {
         $this->removeButtonHtmlClass('uk-button');

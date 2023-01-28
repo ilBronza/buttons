@@ -264,11 +264,6 @@ class Button
     //     return view('buttons::__a', ['button' => $this])->render();
     // }
 
-    public function renderLink()
-    {
-        return view('buttons::__a', ['button' => $this])->render();
-    }
-
     public function renderBlankLink()
     {
         $this->blank = true;
