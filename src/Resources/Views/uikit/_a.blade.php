@@ -6,6 +6,10 @@
 	id="{{ $button->getContextId() }}"
 	{!! $button->renderToggle() !!}
 
+	@if($returnConfirm = $button->getReturnConfirmText())
+	onclick="return confirm('{{ $returnConfirm }}')"
+	@endif
+
 	>
 
 	{!! $button->renderFaIcon() !!}

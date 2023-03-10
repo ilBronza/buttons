@@ -52,7 +52,9 @@ class Button
     public $data = [];
     public $children;
     public $returnConfirm = false;
+    public $target;
     private $hash;
+    public $returnConfirmText;
 
 
     //DEPRECATO
@@ -61,6 +63,11 @@ class Button
     public function getViewComponentName() : ? string
     {
         return 'buttons';
+    }
+
+    public function getReturnConfirmText() : ? string
+    {
+        return $this->returnConfirmText;
     }
 
     public function __construct(array $parameters)
@@ -344,6 +351,21 @@ class Button
         return 'button';
     }
 
+    public function hasTargetBlank()
+    {
+        return $this->getTarget() == '_blank';
+    }
+
+    public function getTarget()
+    {
+        return $this->target;
+    }
+
+    public function setTarget(string $target)
+    {
+        $this->target = $target;
+    }
+
     /**
      * render javascript redirect for datatables buttons
      *
@@ -351,6 +373,9 @@ class Button
      **/
     public function renderJsRedirect() : string
     {
+        if($this->hasTargetBlank())
+            return "window.open('{$this->getHref()}')";
+
         return "window.location.href='{$this->getHref()}'";
     }
 
