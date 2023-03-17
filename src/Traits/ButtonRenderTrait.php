@@ -11,6 +11,11 @@ trait ButtonRenderTrait
         return $this->renderType('button');
     }
 
+    public function renderSubmit()
+    {
+        return $this->renderType('submit');
+    }
+
     public function renderLink()
     {
         return $this->renderA();

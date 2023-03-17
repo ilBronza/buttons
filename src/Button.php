@@ -379,12 +379,14 @@ class Button
         return "window.location.href='{$this->getHref()}'";
     }
 
-    public function setSubmit()
+    public function setSubmit() : static
     {
         $this->submit = true;
 
         if(! $this->value)
             $this->value = 1;
+
+        return $this;
     }
 
     public function isSubmit()
