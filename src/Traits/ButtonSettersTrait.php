@@ -55,6 +55,13 @@ trait ButtonSettersTrait
 		return $this->setPosition(0);
 	}
 
+	public function setLast()
+	{
+		return $this->setPosition(
+			$this->getNavbar()->getButtonsCount()
+		);
+	}
+
 	public function increasePosition()
 	{
 		$this->position ++;
