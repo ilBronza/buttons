@@ -55,7 +55,17 @@ class Button
     public $target;
     private $hash;
     public $returnConfirmText;
+    public $dropdownMode;
 
+    public function setDropdownMode(string $mode = 'hover')
+    {
+        return $this->dropdownMode = $mode;
+    }
+
+    public function getDropdownMode() : string
+    {
+        return $this->dropdownMode ?? config('buttons.dropdownMode', 'hover');
+    }
 
     //DEPRECATO
     public $ukIcon;

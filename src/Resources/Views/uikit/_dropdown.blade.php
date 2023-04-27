@@ -6,7 +6,7 @@
 		style="width: {{ $width }};";
 	@endif
 
-	uk-dropdown="@if($button->isChild()) pos: right-top; offset: 30 @endif"
+	uk-dropdown="@if($button->isChild()) pos: right-top; offset: 30 @endif mode: {{ $button->getDropdownMode() }}"
 	>
 		<div class="uk-navbar-dropdown-grid uk-child-width-1-{{ $button->getChildrenColumnNumber() }}" uk-grid>
 
