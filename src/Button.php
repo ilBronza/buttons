@@ -36,10 +36,12 @@ class Button
 
     use NewButtonMethodsTraitToRenameAfterHaveMovedEverything;
 
+    public $name;
     public $href;
     public $submit;
     public $iframe = false;
     public $ajax;
+    public $sortingIndex;
     public $ajaxTableSelector;
     // public $ukIcon;
     // public $dgIcon;
