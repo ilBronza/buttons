@@ -12,6 +12,8 @@
 
 	>
 
+	{!! $button->renderImage() !!}
+
 	{!! $button->renderFaIcon() !!}
 	{!! $button->getText() !!}
 

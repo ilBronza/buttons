@@ -49,6 +49,7 @@ class Button
     public $classes = ['uk-button'];
     public $flatWindow;
     public $type;
+    public ? string $image;
     public $tooltip;
     public $attributes = [];
     public $data = [];
@@ -89,11 +90,17 @@ class Button
 
         $this->setNameByParameters($parameters);
         $this->setIconByParameters($parameters);
+        $this->setImageByParameters($parameters);
 
         $this->children = collect();
         $this->setChildrenByParameters($parameters);
 
         // $this->hash = Str::uuid();
+    }
+
+    public function setImageByParameters(array $parameters)
+    {
+        $this->image = $parameters['image'] ?? null;
     }
 
     static function create(array $parameters) : self
@@ -287,6 +294,14 @@ class Button
     {
         $this->blank = true;
         return view('buttons::__a', ['button' => $this])->render();
+    }
+
+    public function renderImage() : ? string
+    {
+        if(! $this->image)
+            return null;
+
+        return '<img style="max-width: 45px;" src="' . $this->image . '" />';
     }
 
     public function renderAsIframe()
