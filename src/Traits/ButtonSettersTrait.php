@@ -50,9 +50,11 @@ trait ButtonSettersTrait
 		$this->position = $position;
 	}
 
-	public function setFirst()
+	public function setFirst() : static
 	{
-		return $this->setPosition(0);
+		$this->setPosition(0);
+
+		return $this;
 	}
 
 	public function setLast()

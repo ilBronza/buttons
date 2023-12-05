@@ -53,6 +53,16 @@ trait UseIconTrait
     	return class_basename($icon) == 'FaIcon';
     }
 
+    public function hasIcon() : bool
+    {
+        return $this->hasFaIcon();
+    }
+
+    public function renderIcon() : ? string
+    {
+        return $this->renderFaIcon();
+    }
+
     public function renderFaIcon() : ? string
     {
     	if($this->hasFaIcon())

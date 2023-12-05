@@ -9,6 +9,12 @@ class FaIcon extends Icon
     public $fillingType;
     public $viewType;
 
+    static function inline(string $code)
+    {
+    	$icon = new static();
+    	return $icon->setCode($code)->render();
+    }
+
 	public function getFillingType()
 	{
 		if($this->fillingType)
