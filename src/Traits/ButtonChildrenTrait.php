@@ -4,9 +4,11 @@ namespace IlBronza\Buttons\Traits;
 
 trait ButtonChildrenTrait
 {
-	public function setChildrenPerColumn(int $childrenPerColumn)
+	public function setChildrenPerColumn(int $childrenPerColumn) : static
 	{
 		$this->childrenPerColumn = $childrenPerColumn;
+
+		return $this;
 	}
 
     public function isChild() : bool

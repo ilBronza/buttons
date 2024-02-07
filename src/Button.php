@@ -201,6 +201,11 @@ class Button
         $this->classes[] = 'uk-button-primary';
     }
 
+    public function setSecondary()
+    {
+        $this->classes[] = 'uk-button-secondary';        
+    }
+
     public function setDanger()
     {
         $this->setHtmlClass('uk-button-danger');
