@@ -1,1 +1,1 @@
-<i class="fa-{{ $icon->getFillingType() }} fa-{{ $icon->getCode() }}"></i>
+<i class="{{ $icon->getHtmlClassesString() }} fa-{{ $icon->getFillingType() }} fa-{{ $icon->getCode() }}"></i>

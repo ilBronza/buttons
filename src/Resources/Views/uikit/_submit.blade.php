@@ -5,8 +5,8 @@
 		value="{{ $button->getValue() }}"
 		id="{{ $button->getContextId() }}"
 
-		@if($returnConfirm = $button->getReturnConfirmText())
-		onclick="return confirm('{{ $returnConfirm }}')"
+		@if($button->hasReturnConfirm())
+		onclick="return confirm('{{ $button->getReturnConfirmText() }}')"
 		@endif
 		>
 

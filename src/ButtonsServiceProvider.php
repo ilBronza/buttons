@@ -2,6 +2,8 @@
 
 namespace IlBronza\Buttons;
 
+use IlBronza\Buttons\Icons\FaIcon;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class ButtonsServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class ButtonsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ilbronza');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'buttons');
         $this->loadViewsFrom(__DIR__.'/Resources/Views', 'buttons');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
@@ -37,6 +39,8 @@ class ButtonsServiceProvider extends ServiceProvider
         $this->app->singleton('button', function ($app) {
             return new Button;
         });
+
+        AliasLoader::getInstance()->alias('FaIcon', FaIcon::class);
     }
 
     /**

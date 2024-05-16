@@ -6,10 +6,25 @@ use Illuminate\Support\Str;
 
 trait ButtonGettersTrait
 {
+    public function isActive() : bool
+    {
+        return !! $this->active;
+    }
+
 	public function getCount()
 	{
 		return $this->count;
 	}
+
+    public function hasbadge() : bool
+    {
+        return !! ($this->badge ?? null);
+    }
+
+    public function getBadgeHtml() : ? string
+    {
+        return $this->badge;
+    }
 
     public function getId()
     {

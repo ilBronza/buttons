@@ -4,6 +4,26 @@ namespace IlBronza\Buttons\Traits;
 
 trait ButtonChildrenTrait
 {
+	public function setContainsActiveElement(bool $contains = true) : static
+	{
+		$this->containsActiveElement = true;
+
+		if($parent = $this->getParent())
+			$parent->setContainsActiveElement($contains);
+
+		return $this;
+	}
+
+	public function containsActiveElement() : bool
+	{
+		return !! $this->containsActiveElement;
+	}
+
+	public function getParent() : ? static
+	{
+		return $this->parent ?? null;
+	}
+
 	public function setChildrenPerColumn(int $childrenPerColumn) : static
 	{
 		$this->childrenPerColumn = $childrenPerColumn;
@@ -24,6 +44,11 @@ trait ButtonChildrenTrait
 	public function getChildren()
 	{
 		return $this->children;
+	}
+
+	public function addButton(self $button)
+	{
+		return $this->addChild($button);
 	}
 
 	public function addChild(self $button)

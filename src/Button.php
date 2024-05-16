@@ -36,16 +36,20 @@ class Button
 
     use NewButtonMethodsTraitToRenameAfterHaveMovedEverything;
 
+    public ?bool $active = null;
+
     public $name;
     public $href;
     public $submit;
     public $iframe = false;
+    public $lightbox = false;
     public $ajax;
     public $sortingIndex;
     public $ajaxTableSelector;
     // public $ukIcon;
     // public $dgIcon;
     public $value;
+    public bool $containsActiveElement = false;
     public $classes = ['uk-button'];
     public $flatWindow;
     public $type;
@@ -78,9 +82,14 @@ class Button
         return 'buttons';
     }
 
+    public function hasReturnConfirm() : bool
+    {
+        return $this->returnConfirm;
+    }
+
     public function getReturnConfirmText() : ? string
     {
-        return $this->returnConfirmText;
+        return $this->returnConfirmText ?? trans('buttons::messages.areYouSure');
     }
 
     public function __construct(array $parameters)
@@ -185,9 +194,10 @@ class Button
             $this->$parameter = $value;
     }
 
-    public function setReturnConfirm(string $confirmationMessage)
+    public function setReturnConfirm(string $confirmationMessage = null)
     {
-        $this->returnConfirm = $confirmationMessage;
+        $this->returnConfirm = true;
+        $this->returnConfirmText = $confirmationMessage;
     }
 
     //DEPRECATED TO SET COUNT
@@ -196,29 +206,39 @@ class Button
     //     $this->count = $count;
     // }
 
-    public function setPrimary()
+    public function setPrimary() : static
     {
         $this->classes[] = 'uk-button-primary';
+
+        return $this;
     }
 
-    public function setSecondary()
+    public function setSecondary() : static
     {
-        $this->classes[] = 'uk-button-secondary';        
+        $this->classes[] = 'uk-button-secondary';
+
+        return $this;
     }
 
-    public function setDanger()
+    public function setDanger() : static
     {
         $this->setHtmlClass('uk-button-danger');
+
+        return $this;
     }
 
-    public function setHtmlClass(string $class)
+    public function setHtmlClass(string $class) : static
     {
         $this->classes[] = $class;
+
+        return $this;
     }
 
-    public function setSmall()
+    public function setSmall() : static
     {
         $this->classes[] = 'uk-button-small';
+
+        return $this;
     }
 
     public function getHtmlClasses()
@@ -349,7 +369,7 @@ class Button
         return $this;
     }
 
-    public function getName()
+    public function getName() : ? string
     {
         if(! empty($this->name))
             return $this->name;
@@ -398,6 +418,16 @@ class Button
         $this->target = $target;
     }
 
+    public function setAsLightbox()
+    {
+        $this->lightbox = true;
+    }
+
+    public function hasLightbox() : bool
+    {
+        return !! $this->lightbox;
+    }
+
     /**
      * render javascript redirect for datatables buttons
      *
@@ -405,15 +435,21 @@ class Button
      **/
     public function renderJsRedirect() : string
     {
-        if($this->hasTargetBlank())
-            return "window.open('{$this->getHref()}')";
+        $redirectString = $this->hasTargetBlank() ? "window.open('{$this->getHref()}')" : "window.location.href='{$this->getHref()}'";
 
-        return "window.location.href='{$this->getHref()}'";
+        if($this->hasReturnConfirm())
+            return "if (window.confirm('{$this->getReturnConfirmText()}')) {
+                {$redirectString};
+            }";
+
+        return "{$redirectString};";
     }
 
     public function setSubmit() : static
     {
         $this->submit = true;
+
+        $this->data['submit'] = true;
 
         if(! $this->value)
             $this->value = 1;
