@@ -21,7 +21,6 @@ trait UseIconTrait
 	{
         //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
         $this->setUkIcon($icon);
-        //TODO DEPRECATED DA rimuovere una volta che non si usano più le uikit icons
 
 		if($type == 'faIcon')
 			return $this->addFaIcon($icon);
