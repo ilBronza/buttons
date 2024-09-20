@@ -124,7 +124,7 @@ class Button
         return $this->attributes;
     }
 
-    public function setAjaxTableButton(string $tableSelector = '.datatable', array $data = [])
+    public function setAjaxTableButton(?string $tableSelector = '.datatable', array $data = [])
     {
         $this->ajax = true;
         $this->ajaxTableSelector = $tableSelector;
