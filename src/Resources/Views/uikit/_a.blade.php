@@ -8,6 +8,14 @@
 	data-type="iframe"
 	@endif
 
+	@foreach($button->getData() as $key => $value)
+		@if(is_string($value))
+			data-{{ $key }}="{{ $value }}"
+		@else
+			data-{{ $key }}="{{ json_encode($value) }}"
+	    @endif
+	@endforeach
+
 	href="{{ $button->getHref() }}"
 
 	class="@if($button->isActive()) uk-text-bold @endif {{ $button->getHtmlClassesString() }}"

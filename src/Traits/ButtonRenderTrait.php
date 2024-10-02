@@ -8,6 +8,7 @@ trait ButtonRenderTrait
 {
     public function render()
     {
+		//buttons::uikit.button
         return $this->renderType('button');
     }
 

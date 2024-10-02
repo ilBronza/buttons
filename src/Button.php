@@ -12,6 +12,7 @@ use IlBronza\Buttons\Traits\ButtonStyleTrait;
 use IlBronza\Buttons\Traits\ButtonTextTrait;
 use IlBronza\Buttons\Traits\ButtonToggleTrait;
 use IlBronza\Buttons\Traits\NewButtonMethodsTraitToRenameAfterHaveMovedEverything;
+use IlBronza\Form\Form;
 use IlBronza\Menu\Traits\InteractsWithNavbarTrait;
 use IlBronza\UikitTemplate\Traits\UseTemplateTrait;
 use Illuminate\Support\Str;
@@ -49,6 +50,7 @@ class Button
     // public $ukIcon;
     // public $dgIcon;
     public $value;
+	public ? Form $form = null;
     public bool $containsActiveElement = false;
     public $classes = ['uk-button'];
     public $flatWindow;
@@ -73,6 +75,20 @@ class Button
     {
         return $this->dropdownMode ?? config('buttons.dropdownMode', 'hover');
     }
+
+	public function setForm(Form $form) : self
+	{
+		$this->form = $form;
+
+		$this->setData('formid', $form->getId());
+
+		return $this;
+	}
+
+	public function getForm() : ? Form
+	{
+		return $this->form;
+	}
 
     //DEPRECATO
     public $ukIcon;
@@ -124,22 +140,39 @@ class Button
         return $this->attributes;
     }
 
-    public function setAjaxTableButton(?string $tableSelector = '.datatable', array $data = [])
-    {
-        $this->ajax = true;
-        $this->ajaxTableSelector = $tableSelector;
+	public function setAjaxTableButton(?string $tableSelector = '.datatable', array $data = [])
+	{
+		$this->ajax = true;
+		$this->ajaxTableSelector = $tableSelector;
 
-        $this->classes[] = 'ib-table-action-button';
-        $this->data['route'] = $this->href;
+		$this->classes[] = 'ib-table-action-button';
+		$this->data['route'] = $this->href;
 
-        //deprecated, la tabella stessa setta il proprio ID
-        $this->data['table'] = $tableSelector;
+		//deprecated, la tabella stessa setta il proprio ID
+		$this->data['table'] = $tableSelector;
 
-        foreach($data as $name => $value)
-            $this->data[$name] = $value;
-    }
+		foreach($data as $name => $value)
+			$this->data[$name] = $value;
+	}
 
-    public function setTableId(string $tableId)
+	public function setSubmitTableButton(?string $tableSelector = '.datatable', array $data = [])
+	{
+		$this->ajax = true;
+		$this->ajaxTableSelector = $tableSelector;
+
+		$this->classes[] = 'ib-table-action-button';
+		$this->data['route'] = $this->href;
+		$this->data['redirectsubmit'] = true;
+
+		//deprecated, la tabella stessa setta il proprio ID
+		$this->data['table'] = $tableSelector;
+		$this->data['table'] = $tableSelector;
+
+		foreach($data as $name => $value)
+			$this->data[$name] = $value;
+	}
+
+	public function setTableId(string $tableId)
     {
         $this->data['tableid'] = $tableId;        
     }
@@ -254,16 +287,25 @@ class Button
         $this->classes[] = $class;
     }
 
-    public function getData()
+    public function getData() : array
     {
         return $this->data;
     }
 
-    public function addData(array $data)
+    public function addData(array $data) : self
     {
         foreach($data as $name => $value)
             $this->data[$name] = $value;
+
+		return $this;
     }
+
+	public function setData(string $key, $value) : self
+	{
+		$this->data[$key] = $value;
+
+		return $this;
+	}
 
     public function renderLi()
     {
