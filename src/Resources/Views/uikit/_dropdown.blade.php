@@ -1,6 +1,6 @@
 @if($button->hasChildren())
 <div
-	class="uk-navbar-dropdown @if(! $button->getDropdownWidth()) uk-width-auto @endif"
+	class="uk-drop uk-navbar-dropdown @if(! $button->getDropdownWidth()) uk-width-auto @endif"
 	
 	@if($width = $button->getDropdownWidth())
 		style="width: {{ $width }};";

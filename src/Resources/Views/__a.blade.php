@@ -1,85 +1,85 @@
 @if($button->iframe)
-<div uk-lightbox>
-@endif
+	<div uk-lightbox>
+		@endif
 
-    @if($button->href)
+		@if($button->href)
 
-    <a
+			<a
 
-        @if((! empty($button->blank))&&($button->blank))
-        target="_blank"
-        @endif
+					@if((! empty($button->blank))&&($button->blank))
+						target="_blank"
+					@endif
 
-        @if(($button->iframe))
-        data-type="iframe"
-        href="{{ $button->href }}?iframed=true"
+					@if(($button->iframe))
+						data-type="iframe"
+					href="{{ $button->href }}?iframed=true"
 
-        @else
-        href="{{ $button->href }}"
-            
-            @if(isset($button->target))
-            target="{{ $button->target }}"
-            @endif
+					@else
+						href="{{ $button->href }}"
 
-        @endif
+					@if(isset($button->target))
+						target="{{ $button->target }}"
+					@endif
 
-        @if(($button->tooltip))
-        uk-tooltip="title: {{ $button->tooltip }}"
-        @endif
+					@endif
 
-        @if(($button->tooltip))
-        uk-tooltip="title: {{ $button->tooltip }}"
-        @endif
+					@if(($button->tooltip))
+						uk-tooltip="title: {{ $button->tooltip }}"
+					@endif
 
-        @if($classes = $button->getHtmlClassesString())
-        class="{{ $classes }}"
-        @endif
+					@if(($button->tooltip))
+						uk-tooltip="title: {{ $button->tooltip }}"
+					@endif
 
-        @if(count($button->data))
-            @foreach($button->data as $name => $value)
-            data-{{ $name }} = "{{ $value }}"
-            @endforeach
-        @endif
+					@if($classes = $button->getHtmlClassesString())
+						class="{{ $classes }}"
+					@endif
 
-        @if($button->ukIcon)
-        uk-icon="{{ $button->ukIcon }}"
-        @endif
+					@if(count($button->data))
+						@foreach($button->data as $name => $value)
+							data-{{ $name }} = "{{ $value }}"
+					@endforeach
+					@endif
 
-        >
+					@if($button->ukIcon)
+						uk-icon="{{ $button->ukIcon }}"
+					@endif
 
-        {{ $button->text }}
-    </a>
+			>
 
-    @else
+				{{ $button->text }}
+			</a>
 
-    <button
+		@else
 
-        @if(count($button->classes))
-        class="{{ implode(" ", $button->classes) }}"
-        @endif
+			<button
 
-        @if(count($button->data))
-            @foreach($button->data as $name => $value)
-            data-{{ $name }} = "{{ $value }}"
-            @endforeach
-        @endif
+					@if(count($button->classes))
+						class="{{ implode(" ", $button->classes) }}"
+					@endif
 
-        @if($button->submit)
-        type="submit"
-        @endif
+					@if(count($button->data))
+						@foreach($button->data as $name => $value)
+							data-{{ $name }} = "{{ $value }}"
+					@endforeach
+					@endif
 
-        @isset($button->ukIcon)
-        uk-icon="{{ $button->ukIcon }}"
-        @endisset
+					@if($button->submit)
+						type="submit"
+					@endif
 
-        >
+					@isset($button->ukIcon)
+						uk-icon="{{ $button->ukIcon }}"
+					@endisset
 
-        {{ $button->text }}
+			>
 
-    </button>
+				{{ $button->text }}
 
-    @endif
+			</button>
 
-@if($button->iframe)
-</div>
+		@endif
+
+		@if($button->iframe)
+	</div>
 @endif

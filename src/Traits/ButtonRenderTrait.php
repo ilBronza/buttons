@@ -50,7 +50,7 @@ trait ButtonRenderTrait
 
         $this->setRenderingContext(Str::slug($viewName));
 
-        return view($viewName, ['button' => $this])->render();    	
+        return view($viewName, ['button' => $this])->render();
     }
 
     public function renderButton()

@@ -383,6 +383,11 @@ class Button
         return $this;
     }
 
+	public function isIframe() : bool
+	{
+		return $this->iframe;
+	}
+
     public function renderIFrame()
     {
         $this->iframe = true;
