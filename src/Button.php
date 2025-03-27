@@ -17,6 +17,8 @@ use IlBronza\Menu\Traits\InteractsWithNavbarTrait;
 use IlBronza\UikitTemplate\Traits\UseTemplateTrait;
 use Illuminate\Support\Str;
 
+use function array_push;
+
 class Button
 {
     use UseTemplateTrait;
@@ -278,6 +280,8 @@ class Button
     {
         if($this->flatWindow)
             array_push($this->classes, 'flatwindow');
+
+	    array_push($this->classes, Str::slug($this->getName()));
 
         return $this->classes;
     }

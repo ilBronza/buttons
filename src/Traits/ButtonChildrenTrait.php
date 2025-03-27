@@ -103,9 +103,12 @@ trait ButtonChildrenTrait
 
 	public function getChildrenColumnNumber()
 	{
-		if($this->childrenColumnNumber)
-			return $this->childrenColumnNumber;
+		if(! $result = $this->childrenColumnNumber)
+			$result = $this->calculateChildrenColumnNumber();
 
-		return $this->calculateChildrenColumnNumber();
+		if($result > 6)
+			return 6;
+
+		return $result;
 	}
 }
