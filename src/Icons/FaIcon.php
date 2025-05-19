@@ -20,12 +20,17 @@ class FaIcon extends Icon
     	return $icon->render();
     }
 
-    static function edit()
-    {
-    	return static::inline('edit');
-    }
+	static function edit()
+	{
+		return static::inline('edit');
+	}
 
-    static function xmark()
+	static function email()
+	{
+		return static::inline('envelope');
+	}
+
+	static function xmark()
     {
     	$icon = new static();
 		$icon->setCode('xmark');
