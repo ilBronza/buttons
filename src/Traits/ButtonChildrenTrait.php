@@ -183,4 +183,9 @@ trait ButtonChildrenTrait
 
 		return $result;
 	}
+
+	public function setDropdownColumns(int $dropdownColumns)
+	{
+		$this->dropdownColumns = $dropdownColumns;
+	}
 }
