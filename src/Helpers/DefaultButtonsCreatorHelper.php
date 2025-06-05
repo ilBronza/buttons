@@ -16,6 +16,12 @@ class DefaultButtonsCreatorHelper
     //     ]);
 	// }
 
+    /**
+     * Create a button that links to the edit page of the given model.
+     *
+     * @param BaseModel $model The model instance.
+     * @return Button
+     */
 	static function getEditButton(BaseModel $model) : Button
 	{
         return Button::create([
@@ -25,6 +31,12 @@ class DefaultButtonsCreatorHelper
         ]);
 	}
 
+    /**
+     * Create a button that links to the show page of the given model.
+     *
+     * @param BaseModel $model The model instance.
+     * @return Button
+     */
 	static function getShowButton(BaseModel $model) : Button
 	{
         return Button::create([
