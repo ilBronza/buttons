@@ -184,6 +184,15 @@ trait ButtonChildrenTrait
 		return $result;
 	}
 
+
+
+	//comment this one per phpDoc
+	/**
+	 * Set the number of columns to display for the children.
+	 *
+	 * @param int $childrenColumnNumber
+	 * @return void
+	 */
 	public function setDropdownColumns(int $dropdownColumns)
 	{
 		$this->dropdownColumns = $dropdownColumns;
