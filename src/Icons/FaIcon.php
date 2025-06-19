@@ -30,10 +30,15 @@ class FaIcon extends Icon
      *
      * @return string
      */
-	static function edit()
-	{
-		return static::inline('edit');
-	}
+    static function edit()
+    {
+        return static::inline('edit');
+    }
+
+    static function link()
+    {
+        return static::inline('link');
+    }
 
     /**
      * Create an inline envelope icon representing email.
