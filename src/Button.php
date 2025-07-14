@@ -174,6 +174,11 @@ class Button
 			$this->data[$name] = $value;
 	}
 
+    public function setRedirectSubmit(? bool $redirectSubmit)
+    {
+        $this->data['redirectsubmit'] = $redirectSubmit;
+    }
+
 	public function setTableId(string $tableId)
     {
         $this->data['tableid'] = $tableId;        
@@ -383,6 +388,8 @@ class Button
     public function setAsIframe()
     {
         $this->iframe = true;
+
+		$this->setData('openiframe', true);
 
         return $this;
     }
