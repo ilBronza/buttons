@@ -15,17 +15,25 @@ class FaIcon extends Icon
      *
      * @return string
      */
-    static function check()
-    {
-    	$icon = new static();
-    	$icon->setCode('check');
+	static function check()
+	{
+		$icon = new static();
+		$icon->setCode('check');
 
-    	$icon->setClass('uk-text-success');
+		$icon->setClass('uk-text-success');
 
-    	return $icon->render();
-    }
+		return $icon->render();
+	}
 
-    /**
+	static function save()
+	{
+		$icon = new static();
+		$icon->setCode('save');
+
+		return $icon->render();
+	}
+
+	/**
      * Create an inline edit icon.
      *
      * @return string
