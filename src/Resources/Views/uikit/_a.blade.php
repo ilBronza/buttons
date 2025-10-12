@@ -4,7 +4,7 @@
 @endif
 
 <a
-	@if($button->hasLightbox())
+	@if(($button->hasLightbox())||($button->isIframe()))
 	data-type="iframe"
 	@endif
 
