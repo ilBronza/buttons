@@ -20,8 +20,6 @@ trait NewButtonMethodsTraitToRenameAfterHaveMovedEverything
     public $toggle;
 
     public $parent;
-    public $roles;
-    public $permissions;
 
     public $position;
 
@@ -47,6 +45,12 @@ trait NewButtonMethodsTraitToRenameAfterHaveMovedEverything
 
         if($parameters['href'] ?? false)
             return $this->name = Str::slug($parameters['href']);
+
+        return $this->name = rand(0, 9999999);
+
+        echo json_encode($parameters);
+
+        die();
 
         throw new \Exception('Missing name parameter required for this button: ' . json_encode($parameters));
     }

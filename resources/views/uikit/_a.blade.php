@@ -8,6 +8,10 @@
 	data-type="iframe"
 	@endif
 
+	@if($button->isDisabled())
+		disabled
+	@endif
+
 	@foreach($button->getData() as $key => $value)
 		@if(is_string($value))
 			data-{{ $key }}="{{ $value }}"

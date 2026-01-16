@@ -2,7 +2,11 @@
 
     <a href="{{ $button->href ?? 'javascript:void(0)' }}"
 
-    @if($button->tooltip)
+       @if($button->isDisabled())
+           disabled
+       @endif
+
+       @if($button->tooltip)
         uk-tooltip title="{{ $button->tooltip }}"
     @endif
     >

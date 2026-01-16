@@ -5,6 +5,10 @@
 	@endif
 
 <a
+	@if(($button->hasLightbox())||($button->isIframe()))
+		data-type="iframe"
+	@endif
+
 	href="{{ $button->getHref() }}"
 
 	class="@if($button->isActive()) uk-text-bold @endif {{ $button->getHtmlClassesString() }}"

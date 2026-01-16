@@ -1,4 +1,8 @@
-	<button 
+	<button
+		@if(($button->hasLightbox())||($button->isIframe()))
+			data-type="iframe"
+		@endif
+
 		class="uk-button {{ $button->getHtmlClassesString() }}"
 		type="submit"
 		name="{{ $button->getName() }}"

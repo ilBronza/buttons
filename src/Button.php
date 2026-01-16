@@ -5,13 +5,14 @@ namespace IlBronza\Buttons;
 use IlBronza\Buttons\Icons\Traits\UseIconTrait;
 use IlBronza\Buttons\Traits\ButtonChildrenTrait;
 use IlBronza\Buttons\Traits\ButtonGettersTrait;
-use IlBronza\Buttons\Traits\ButtonPermissionsTrait;
 use IlBronza\Buttons\Traits\ButtonRenderTrait;
 use IlBronza\Buttons\Traits\ButtonSettersTrait;
 use IlBronza\Buttons\Traits\ButtonStyleTrait;
 use IlBronza\Buttons\Traits\ButtonTextTrait;
 use IlBronza\Buttons\Traits\ButtonToggleTrait;
 use IlBronza\Buttons\Traits\NewButtonMethodsTraitToRenameAfterHaveMovedEverything;
+use IlBronza\CRUD\Interfaces\CRUDHasRolesInterface;
+use IlBronza\CRUD\Traits\IlBronzaPackages\IlBronzaHasRolesTrait;
 use IlBronza\Form\Form;
 use IlBronza\Menu\Traits\InteractsWithNavbarTrait;
 use IlBronza\UikitTemplate\Traits\UseTemplateTrait;
@@ -19,15 +20,15 @@ use Illuminate\Support\Str;
 
 use function array_push;
 
-class Button
+class Button implements CRUDHasRolesInterface
 {
+	use IlBronzaHasRolesTrait;
     use UseTemplateTrait;
     use UseIconTrait;
 
     use ButtonTextTrait;
     use ButtonChildrenTrait;
 
-    use ButtonPermissionsTrait;
     use ButtonGettersTrait;
     use ButtonSettersTrait;
     use ButtonToggleTrait;
@@ -51,6 +52,8 @@ class Button
     public $ajaxTableSelector;
     // public $ukIcon;
     // public $dgIcon;
+
+	public bool $disabled = false;
     public $value;
 	public ? Form $form = null;
     public bool $containsActiveElement = false;
@@ -246,14 +249,14 @@ class Button
     //     $this->count = $count;
     // }
 
-    public function setPrimary() : static
-    {
-        $this->classes[] = 'uk-button-primary';
+	public function setPrimary() : static
+	{
+		$this->classes[] = 'uk-button-primary';
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function setSecondary() : static
+	public function setSecondary() : static
     {
         $this->classes[] = 'uk-button-secondary';
 
@@ -267,7 +270,19 @@ class Button
         return $this;
     }
 
-    public function setHtmlClass(string $class) : static
+	public function setDisabled(bool $disabled = true) : static
+	{
+		$this->disabled = $disabled;
+
+		return $this;
+	}
+
+	public function isDisabled() : bool
+	{
+		return $this->disabled;
+	}
+
+	public function setHtmlClass(string $class) : static
     {
         $this->classes[] = $class;
 

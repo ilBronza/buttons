@@ -4,6 +4,10 @@
 
 <{!! $button->getTag() !!}
 
+    @if($button->isDisabled())
+        disabled
+    @endif
+
     @if($button->hasHref())
     href="{{ $button->getHref() }}"
     @endif

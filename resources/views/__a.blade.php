@@ -5,6 +5,9 @@
 		@if($button->href)
 
 			<a
+					@if($button->isDisabled())
+						disabled
+					@endif
 
 					@if((! empty($button->blank))&&($button->blank))
 						target="_blank"
@@ -53,6 +56,10 @@
 		@else
 
 			<button
+
+					@if($button->isDisabled())
+						disabled
+					@endif
 
 					@if(count($button->classes))
 						class="{{ implode(" ", $button->classes) }}"

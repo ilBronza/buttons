@@ -3,6 +3,10 @@
     @if($button->href)
 
     <a
+        @if($button->isDisabled())
+            disabled
+        @endif
+
         @if(! $button->isAjaxButton())
         href="{{ $button->href }}"
         @endif

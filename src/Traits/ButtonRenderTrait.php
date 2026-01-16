@@ -2,7 +2,10 @@
 
 namespace IlBronza\Buttons\Traits;
 
+use IlBronza\CRUD\Helpers\UserRolesPermissionsHelpers\UserRolesPermissionsHelper;
 use Illuminate\Support\Str;
+
+use Auth;
 
 trait ButtonRenderTrait
 {
@@ -44,8 +47,11 @@ trait ButtonRenderTrait
         $this->renderingContext = $renderingContext;
     }
 
-    private function renderType(string $type) : string
+    private function renderType(string $type) : ? string
     {
+		if(! UserRolesPermissionsHelper::hasValidItemRoles($this))
+			return null;
+
         $viewName = $this->getTemplateViewName($type);
 
         $this->setRenderingContext(Str::slug($viewName));
