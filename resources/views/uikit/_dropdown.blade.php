@@ -1,12 +1,16 @@
 @if($button->hasChildren())
+{{--
+  Allineato alla doc UIkit Navbar: pannello = solo .uk-navbar-dropdown (niente classi generiche .uk-drop/.uk-dropdown qui;
+  UIkit le aggiunge in connected). Il mode va su uk-navbar nel template Menu; sul pannello flyout annidato solo pos/offset.
+--}}
 <div
-	class="uk-drop uk-navbar-dropdown @if(! $button->getDropdownWidth()) uk-width-auto @endif"
-	
+	class="uk-navbar-dropdown @if(! $button->getDropdownWidth()) uk-width-auto @endif"
 	@if($width = $button->getDropdownWidth())
-		style="width: {{ $width }};";
+		style="width: {{ $width }};"
 	@endif
-
-	uk-dropdown="@if($button->isChild()) pos: right-top; offset: 30 @endif mode: {{ $button->getDropdownMode() }}"
+	@if($button->isChild())
+	uk-dropdown="pos: right-top; offset: 30"
+	@endif
 	>
 		<div class="uk-navbar-dropdown-grid uk-child-width-1-{{ $button->getChildrenColumnNumber() }}" uk-grid>
 
@@ -20,7 +24,7 @@
 			</div>
 			<div>
 				<ul class="uk-nav uk-navbar-dropdown-nav">
-					
+
 					@endif
 				@endforeach
 				</ul>

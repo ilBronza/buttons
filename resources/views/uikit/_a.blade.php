@@ -20,7 +20,7 @@
 	    @endif
 	@endforeach
 
-	href="{{ $button->getHref() }}"
+	href="{{ (($navbarDropdownParent ?? false) && $button->hasChildren()) ? $button->getNoHrefValue() : $button->getHref() }}"
 
 	class="@if($button->isActive()) uk-text-bold @endif {{ $button->getHtmlClassesString() }}"
 

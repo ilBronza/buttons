@@ -44,6 +44,6 @@ trait ButtonGettersTrait
         if(! $this->isChild())
             return null;
 
-        return 200 * $this->getChildrenColumnNumber() . 'px;';
+        return 200 * $this->getChildrenColumnNumber() . 'px';
     }
 }
