@@ -1,8 +1,4 @@
 @if($button->hasChildren())
-{{--
-  Allineato alla doc UIkit Navbar: pannello = solo .uk-navbar-dropdown (niente classi generiche .uk-drop/.uk-dropdown qui;
-  UIkit le aggiunge in connected). Il mode va su uk-navbar nel template Menu; sul pannello flyout annidato solo pos/offset.
---}}
 <div
 	class="uk-navbar-dropdown @if(! $button->getDropdownWidth()) uk-width-auto @endif"
 	@if($width = $button->getDropdownWidth())
