@@ -71,9 +71,9 @@ class ButtonsServiceProvider extends ServiceProvider
         ], 'button.views');*/
 
         // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/ilbronza'),
-        ], 'button.views');*/
+        $this->publishes([
+            __DIR__.'/../resources/assets' => base_path('resources'),
+        ], 'button.assets');
 
         // Publishing the translation files.
         /*$this->publishes([
