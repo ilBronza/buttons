@@ -14,7 +14,36 @@
     "require": {
     },
     "require-dev": {
+        "orchestra/testbench": "^10.0",
+        "ilbronza/crud": "@dev",
+        "ilbronza/form": "@dev",
+        "ilbronza/menu": "@dev",
+        "ilbronza/uikittemplate": "@dev"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../Crud",
+            "options": { "symlink": true }
+        },
+        {
+            "type": "path",
+            "url": "../Form",
+            "options": { "symlink": true }
+        },
+        {
+            "type": "path",
+            "url": "../Menu",
+            "options": { "symlink": true }
+        },
+        {
+            "type": "path",
+            "url": "../UikitTemplate",
+            "options": { "symlink": true }
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "IlBronza\\Buttons\\": "src/"
@@ -22,8 +51,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "IlBronza\\Buttons\\Tests\\": "tests"
+            "IlBronza\\Buttons\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "extra": {
         "laravel": {
