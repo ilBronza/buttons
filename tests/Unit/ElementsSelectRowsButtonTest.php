@@ -9,22 +9,25 @@ use InvalidArgumentException;
 
 class ElementsSelectRowsButtonTest extends TestCase
 {
-	public function testItRequiresARoute()
+	public function testItRequiresARouteOrPostUrlWhenRendering()
 	{
 		$this->expectException(InvalidArgumentException::class);
 
-		ElementsSelectRowsButton::create([
+		$button = ElementsSelectRowsButton::create([
 			'elements' => ['first' => 'Primo elemento']
 		]);
+
+		$button->renderJsMethod();
 	}
 
-	public function testItRequiresElements()
+	public function testItRequiresElementsWhenRendering()
 	{
 		$this->expectException(InvalidArgumentException::class);
 
-		ElementsSelectRowsButton::create([
-			'route' => 'rows.associate'
-		]);
+		$button = ElementsSelectRowsButton::create([]);
+		$button->setPostUrl('https://example.com/rows/associate');
+
+		$button->renderJsMethod();
 	}
 
 	public function testItRendersSelect2PostWithTheSelectedRows()
@@ -39,11 +42,11 @@ class ElementsSelectRowsButtonTest extends TestCase
 
 		$javascript = $button->renderJsMethod();
 
-		$this->assertStringContainsString('select2', $javascript);
-		$this->assertStringContainsString("type: 'POST'", $javascript);
-		$this->assertStringContainsString('ibDtCollectSelectedRowIds(dt)', $javascript);
-		$this->assertStringContainsString('data[elementIdField] = elementId', $javascript);
-		$this->assertStringContainsString('data[selectedIdsField] = selectedIds', $javascript);
+		$this->assertStringStartsWith('window.ibDtMountElementsSelectRows(node, dt, ', $javascript);
+		$this->assertStringNotContainsString('select2', $javascript);
+		$this->assertStringNotContainsString("type: 'POST'", $javascript);
+		$this->assertStringContainsString('"elementIdField":"element_id"', $javascript);
+		$this->assertStringContainsString('"selectedIdsField":"ids"', $javascript);
 		$this->assertStringContainsString('rows/associate/42', $javascript);
 		$this->assertStringContainsString('supplier-1', $javascript);
 	}
@@ -63,5 +66,20 @@ class ElementsSelectRowsButtonTest extends TestCase
 
 		$this->assertStringContainsString('"target_id"', $javascript);
 		$this->assertStringContainsString('"row_ids"', $javascript);
+	}
+
+	public function testItCanBeConfiguredWithFluentMethods()
+	{
+		$button = ElementsSelectRowsButton::create([
+			'text' => 'Associa elementi'
+		]);
+
+		$this->assertSame($button, $button->setElements(['target-1' => 'Target Uno']));
+		$this->assertSame($button, $button->setPostUrl('https://example.com/rows/associate'));
+
+		$javascript = $button->renderJsMethod();
+
+		$this->assertStringContainsString('https://example.com/rows/associate', $javascript);
+		$this->assertStringContainsString('target-1', $javascript);
 	}
 }
