@@ -1,11 +1,11 @@
 @if($button->hasChildren())
 <div
-	class="uk-navbar-dropdown @if(! $button->getDropdownWidth()) uk-width-auto @endif"
+	class="{{ $button->isChild() ? 'uk-dropdown' : 'uk-navbar-dropdown' }} @if(! $button->getDropdownWidth()) uk-width-auto @endif"
 	@if($width = $button->getDropdownWidth())
 		style="width: {{ $width }};"
 	@endif
 	@if($button->isChild())
-	uk-dropdown="pos: right-top; offset: 30"
+	uk-dropdown="mode: {{ config('menu.buttons.dropdownMode', 'hover') }}; pos: right-top"
 	@endif
 	>
 		<div class="uk-navbar-dropdown-grid uk-child-width-1-{{ $button->getChildrenColumnNumber() }}" uk-grid>
